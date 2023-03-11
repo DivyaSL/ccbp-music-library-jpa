@@ -63,6 +63,11 @@ public class SongJpaService implements SongRepository {
 
     @Override 
     public void deleteSong(int songId){
-        songJpaRepository.deleteById(songId);
+        try {
+            songJpaRepository.deleteById(songId);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        
     }
 }
